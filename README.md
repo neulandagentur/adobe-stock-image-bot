@@ -1,6 +1,10 @@
 # adobe-stock-image-bot
 A mini bot that returns the author based on an image id without API.
 
+<img src="https://badge.fury.io/js/adobe-stock-image-bot.svg">
+
+---
+
 # Install
 
 ``` npm
