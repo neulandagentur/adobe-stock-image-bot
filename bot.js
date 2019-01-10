@@ -1,9 +1,8 @@
 const puppeteer = require('puppeteer');
 
-
 const url = 'https://stock.adobe.com/de/';
 const config = {
-    headless: false
+    headless: true
 };
 
 const elements = {

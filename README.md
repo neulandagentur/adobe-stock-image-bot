@@ -5,13 +5,13 @@ A mini bot that returns the author based on an image id without API.
 
 ---
 
-# Install
+## Install
 
 ``` npm
 npm i adobe-stock-image-bot
 ```
 
-# Usage 
+## Usage
 ``` nodejs
 const getAuthor = require('adobe-stock-image-bot');
 
@@ -23,3 +23,8 @@ const test = '11111111';
 })();
 
 ```
+
+## Changelog
+
+### 0.1.1
+- Change headless from false to true
