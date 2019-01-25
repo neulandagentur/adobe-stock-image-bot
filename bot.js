@@ -16,6 +16,8 @@ const getAuthor = async (imageNumber) => {
     page.setViewport({width: 1200, height: 764});
     await page.goto(url);
 
+    await page.waitFor(1000);
+
     // click to the login inoutfield
     await page.click(elements.login);
     await page.keyboard.type(imageNumber);
@@ -35,6 +37,8 @@ const getAuthor = async (imageNumber) => {
 
     // convert the string
     text = text.replace(/ +(?= )/g,'').replace(/\n/g,'').trim();
+
+    await browser.close();
 
     return text;
 };
