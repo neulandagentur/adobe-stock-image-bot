@@ -16,7 +16,7 @@ const getAuthor = async (imageNumber) => {
     page.setViewport({width: 1200, height: 764});
     await page.goto(url);
 
-    await page.waitFor(1000);
+    await page.waitFor(4000);
 
     // click to the login inoutfield
     await page.click(elements.login);
@@ -24,7 +24,7 @@ const getAuthor = async (imageNumber) => {
     // await
     page.keyboard.press('Enter');
 
-    await page.waitFor(2000);
+    await page.waitFor(4000);
 
     let text;
 
@@ -33,14 +33,18 @@ const getAuthor = async (imageNumber) => {
       text = await page.evaluate(element => element.textContent, element);
     } catch (e) {
       console.log(e);
+      return false;
     }
-
-    // convert the string
-    text = text.replace(/ +(?= )/g,'').replace(/\n/g,'').trim();
 
     await browser.close();
 
-    return text;
+    // convert the string
+    if (typeof text === 'string') {
+        text = text.replace(/ +(?= )/g,'').replace(/\n/g,'').trim();
+        return text;
+    }
+
+    return false;
 };
 
 module.exports = getAuthor;
