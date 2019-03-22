@@ -1,3 +1,7 @@
+<p align="center"><img src="assets/logo.png" width="300" height="auto"></p>
+
+---
+
 # adobe-stock-image-bot
 A mini bot that returns the author based on an image id without API.
 
