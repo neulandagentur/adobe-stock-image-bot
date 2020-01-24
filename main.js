@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer');
  * @type {Object}
  */
 const config = {
-    headless: (process.argv.indexOf('--env=debug') < 0)
+  headless: (process.argv.indexOf('--env=debug') < 0),
 };
 
 
@@ -18,14 +18,14 @@ const config = {
  * @return {String|Boolean} - String if an author was found else False
  */
 module.exports = async (id) => {
-  if (!id || typeof id !== 'string') {
+  if (!id || typeof id !== 'string') {
     throw new Error(`${id} is not a valid input`);
   }
 
   // launch browser
   const browser = await puppeteer.launch(config);
   const page = await browser.newPage();
-  page.setViewport({width: 1200, height: 764});
+  page.setViewport({ width: 1200, height: 764 });
 
   // open adobe stock
   await page.goto('https://stock.adobe.com');
@@ -41,9 +41,9 @@ module.exports = async (id) => {
   try {
     const authorSelector = '[data-t="detail-panel-content-author-name"] a';
     await page.waitForSelector(authorSelector, {
-      timeout: 3000
+      timeout: 3000,
     });
-    author = await page.$eval(authorSelector, el => el.innerText);
+    author = await page.$eval(authorSelector, (el) => el.innerText);
   } catch (e) {
     return false;
   }
