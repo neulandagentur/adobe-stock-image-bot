@@ -1,50 +1,56 @@
+// import puppeteer
 const puppeteer = require('puppeteer');
 
-const url = 'https://stock.adobe.com/de/';
+/**
+ * base configs
+ *
+ * @type {Object}
+ */
 const config = {
-    headless: true
+    headless: (process.argv.indexOf('--env=debug') < 0)
 };
 
-const elements = {
-    login: '.js-search-text-input.input--silent',
-    author: '[data-ingest-clicktype="details-contributor-link"]'
-};
 
-const getAuthor = async (imageNumber) => {
-    const browser = await puppeteer.launch(config);
-    const page = await browser.newPage();
-    page.setViewport({width: 1200, height: 764});
-    await page.goto(url);
+/**
+ * main function to return the author name based on the image id
+ *
+ * @param {String} id - Image id
+ * @return {String|Boolean} - String if an author was found else False
+ */
+module.exports = async (id) => {
+  if (!id || typeof id !== 'string') {
+    throw new Error(`${id} is not a valid input`);
+  }
 
-    await page.waitFor(4000);
+  // launch browser
+  const browser = await puppeteer.launch(config);
+  const page = await browser.newPage();
+  page.setViewport({width: 1200, height: 764});
 
-    // click to the login inoutfield
-    await page.click(elements.login);
-    await page.keyboard.type(imageNumber);
-    // await
-    page.keyboard.press('Enter');
+  // open adobe stock
+  await page.goto('https://stock.adobe.com');
 
-    await page.waitFor(4000);
+  // insert id into input
+  await page.click('.js-search-text-input.input--silent');
+  await page.keyboard.type(id);
+  await page.keyboard.press('Enter');
 
-    let text;
+  // author html field
+  let author;
 
-    try {
-      const element = await page.$(elements.author);
-      text = await page.evaluate(element => element.textContent, element);
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-
-    await browser.close();
-
-    // convert the string
-    if (typeof text === 'string') {
-        text = text.replace(/ +(?= )/g,'').replace(/\n/g,'').trim();
-        return text;
-    }
-
+  try {
+    const authorSelector = '[data-t="detail-panel-content-author-name"] a';
+    await page.waitForSelector(authorSelector, {
+      timeout: 3000
+    });
+    author = await page.$eval(authorSelector, el => el.innerText);
+  } catch (e) {
     return false;
-};
+  }
 
-module.exports = getAuthor;
+  // close the browser
+  await browser.close();
+
+  // return the value
+  return author.trim();
+};

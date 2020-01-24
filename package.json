@@ -4,7 +4,7 @@
   "description": "📷 Adobe-Stock image id => author name",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "example": "node example.js --env=debug"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/neulandagentur/adobe-stock-image-bot#readme",
   "devDependencies": {
-    "puppeteer": "^1.11.0"
+    "puppeteer": "^1.20.0"
   }
 }

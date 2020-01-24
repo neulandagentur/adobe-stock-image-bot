@@ -1,5 +1,5 @@
-const getAuthor = require('./bot');
-
+// example case
+const getAuthor = require('./main');
 const test = '81809773';
 
 (async () => {

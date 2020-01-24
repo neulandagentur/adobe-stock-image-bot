@@ -26,8 +26,3 @@ const test = '184567447';
 })();
 
 ```
-
-## Changelog
-
-### 0.1.1
-- Change headless from false to true
