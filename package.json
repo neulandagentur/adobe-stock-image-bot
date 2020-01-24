@@ -4,7 +4,8 @@
   "description": "📷 Adobe-Stock image id => author name",
   "main": "main.js",
   "scripts": {
-    "example": "node example.js --env=debug"
+    "example": "node example.js --env=debug",
+    "lint": "node_modules/.bin/eslint ./*.js"
   },
   "repository": {
     "type": "git",
