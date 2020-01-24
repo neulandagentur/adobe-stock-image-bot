@@ -1,9 +1,8 @@
-<p align="center"><img src="assets/logo.png" width="300" height="auto"></p>
+<p align="center"><img src="assets/logo.png" width="200" height="auto"></p>
 
 ---
 
-# adobe-stock-image-bot
-A mini bot that returns the author based on an image id without API.
+Helper function that returns an author of an adobe stock image id.
 
 <img src="https://badge.fury.io/js/adobe-stock-image-bot.svg">
 
@@ -19,7 +18,7 @@ npm i adobe-stock-image-bot
 ``` nodejs
 const getAuthor = require('adobe-stock-image-bot');
 
-const test = '11111111';
+const test = '184567447';
 
 (async () => {
     const author = await getAuthor(test);
